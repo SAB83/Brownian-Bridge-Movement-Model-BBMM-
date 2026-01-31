@@ -1,0 +1,29 @@
+paths:
+  # One or more geolocator CSV files (local paths).
+  input_csvs:
+    - "/Users/.../spring2.main2.csv"
+
+outputs:
+  dir: "outputs"
+  cleaned_csv: "outputs/intermediate/geolocator_cleaned.csv"
+  move_rds: "outputs/intermediate/move_objects.rds"
+  dbbmm_rds: "outputs/intermediate/dbbmm_objects.rds"
+  ud_rds: "outputs/intermediate/ud_list.rds"
+  composite_ud_rds: "outputs/final/composite_ud.rds"
+
+bbmm:
+  # Use a projected CRS in meters for BBMM calculations
+  projection: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs"
+  location_error_m: 8
+  window_size: 31
+  ext: 0.5          # extent multiplier passed to move::brownian.bridge.dyn
+
+raster:
+  nrows: 150
+  ncols: 150
+  resample_method: "bilinear"
+
+options:
+  timezone: "UTC"
+  chunk_size: 5
+  set_seed: 1
